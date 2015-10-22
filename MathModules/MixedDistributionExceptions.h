@@ -23,13 +23,4 @@ public:
 	}
 };
 
-class TMixedProbabilityException : public TMixedDistributionException
-{
-	~TMixedProbabilityException();
-	const char* GetMessage()
-	{
-		return "For this input the mixed distribution does not have a probability!";
-	}
-};
-
 #endif
