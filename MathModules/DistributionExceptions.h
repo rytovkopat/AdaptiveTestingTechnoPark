@@ -6,8 +6,8 @@
 class TNonRandomException : public TDistributionException
 {
 public:
-	~TNonRandomException();
-	const char* GetMessage()
+	virtual ~TNonRandomException();
+	virtual const char* GetMessage()
 	{
 		return "The value is not random!";
 	}
@@ -16,8 +16,8 @@ public:
 class TInvalidParametersException : public TDistributionException
 {
 public:
-	~TInvalidParametersException();
-	const char* GetMessage()
+	virtual ~TInvalidParametersException();
+	virtual const char* GetMessage()
 	{
 		return "Some parameters of distribution are impossible or undefined!";
 	}
@@ -26,8 +26,8 @@ public:
 class TExpectedValueNotExistsException : public TDistributionException
 {
 public:
-	~TExpectedValueNotExistsException();
-	const char* GetMessage()
+	virtual ~TExpectedValueNotExistsException();
+	virtual const char* GetMessage()
 	{
 		return "Expected value is undefined for this distribution!";
 	}
@@ -36,8 +36,8 @@ public:
 class TDispersionNotExistsException : public TDistributionException
 {
 public:
-	~TDispersionNotExistsException();
-	const char* GetMessage()
+	virtual ~TDispersionNotExistsException();
+	virtual const char* GetMessage()
 	{
 		return "Dispersion and standard deviation are undefined for this distribution!";
 	}
@@ -46,10 +46,19 @@ public:
 class TImpossibleFunctionValueException : TDistributionException
 {
 public:
-	~TImpossibleFunctionValueException();
-	const char* GetMessage()
+	virtual ~TImpossibleFunctionValueException();
+	virtual const char* GetMessage()
 	{
 		return "For each distribution its function value lies between 0.0 and 1.0";
+	}
+};
+
+class TUndefinedDistributionMethod : TDistributionException
+{
+	virtual ~TUndefinedDistributionMethod();
+	virtual const char* GetMessage()
+	{
+		return "This method was called while being undefined!";
 	}
 };
 

@@ -6,8 +6,8 @@
 class TContinuousProbabilityException : public TContinuousDistributionException
 {
 public:
-	~TContinuousProbabilityException();
-	const char* GetMessage()
+	virtual ~TContinuousProbabilityException();
+	virtual const char* GetMessage()
 	{
 		return "Continuous distribution does not have a probability!";
 	}

@@ -6,8 +6,8 @@
 class TMixedProbabilityException : TMixedDistributionException
 {
 public:
-	~TMixedProbabilityException();
-	const char* GetMessage()
+	virtual ~TMixedProbabilityException();
+	virtual const char* GetMessage()
 	{
 		return "For this input the mixed distribution does not have a probability!";
 	}
@@ -16,8 +16,8 @@ public:
 class TMixedDensityException : TMixedDistributionException
 {
 public:
-	~TMixedDensityException();
-	const char* GetMessage()
+	virtual TMixedDensityException();
+	virtual const char* GetMessage()
 	{
 		return "For this input the mixed distribution does not have a density!";
 	}

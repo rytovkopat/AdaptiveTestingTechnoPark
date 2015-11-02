@@ -30,66 +30,66 @@ public:
 	virtual long double GetDispersion() = 0;
 	virtual long double GetStandardDevation() = 0;
 	
-	virtual bool CriteriaExpectedLeft(std::vector<double>, long double DefaultExpectedValue) = 0;
-	virtual bool CriteriaExpectedRight(std::vector<double>, long double DefaultExpectedValue) = 0;
-	virtual bool CriteriaExpectedCenter(std::vector<double>, long double DefaultExpectedValue) = 0;
-	virtual bool CriteriaDeviationLeft(std::vector<double>, long double DefaultDistorsion) = 0;
-	virtual bool CriteriaDeviationRight(std::vector<double>, long double DefaultDistorsion) = 0;
-	virtual bool CriteriaDeviationCenter(std::vector<double>, long double DefaultDistorsion) = 0;
+	virtual bool CriteriaExpectedLeft(std::vector<double> Sample, long double DefaultExpectedValue, double Level) = 0;
+	virtual bool CriteriaExpectedRight(std::vector<double> Sample, long double DefaultExpectedValue, double Level) = 0;
+	virtual bool CriteriaExpectedCenter(std::vector<double> Sample, long double DefaultExpectedValue, double Level) = 0;
+	virtual bool CriteriaDeviationLeft(std::vector<double> Sample, long double DefaultDeviation, double Level) = 0;
+	virtual bool CriteriaDeviationRight(std::vector<double> Sample, long double DefaultDeviation, double Level) = 0;
+	virtual bool CriteriaDeviationCenter(std::vector<double> Sample, long double DefaultDeviation, double Level) = 0;
 	
-	virtual bool CriteriaExpectedLeft(std::vector<long double>, long double DefaultExpectedValue) = 0;
-	virtual bool CriteriaExpectedRight(std::vector<long double>, long double DefaultExpectedValue) = 0;
-	virtual bool CriteriaExpectedCenter(std::vector<long double>, long double DefaultExpectedValue) = 0;
-	virtual bool CriteriaDeviationLeft(std::vector<long double>, long double DefaultDistorsion) = 0;
-	virtual bool CriteriaDeviationRight(std::vector<long double>, long double DefaultDistorsion) = 0;
-	virtual bool CriteriaDeviationCenter(std::vector<long double>, long double DefaultDistorsion) = 0;
+	virtual bool CriteriaExpectedLeft(std::vector<long double> Sample, long double DefaultExpectedValue, double Level) = 0;
+	virtual bool CriteriaExpectedRight(std::vector<long double> Sample, long double DefaultExpectedValue, double Level) = 0;
+	virtual bool CriteriaExpectedCenter(std::vector<long double> Sample, long double DefaultExpectedValue, double Level) = 0;
+	virtual bool CriteriaDeviationLeft(std::vector<long double> Sample, long double DefaultDeviation, double Level) = 0;
+	virtual bool CriteriaDeviationRight(std::vector<long double> Sample, long double DefaultDeviation, double Level) = 0;
+	virtual bool CriteriaDeviationCenter(std::vector<long double> Sample, long double DefaultDeviation, double Level) = 0;
 	
-	virtual bool CriteriaExpectedLeft(std::vector<unsigned>, long double DefaultExpectedValue) = 0;
-	virtual bool CriteriaExpectedRight(std::vector<unsigned>, long double DefaultExpectedValue) = 0;
-	virtual bool CriteriaExpectedCenter(std::vector<unsigned>, long double DefaultExpectedValue) = 0;
-	virtual bool CriteriaDeviationLeft(std::vector<unsigned>, long double DefaultDistorsion) = 0;
-	virtual bool CriteriaDeviationRight(std::vector<unsigned>, long double DefaultDistorsion) = 0;
-	virtual bool CriteriaDeviationCenter(std::vector<unsigned>, long double DefaultDistorsion) = 0;
+	virtual bool CriteriaExpectedLeft(std::vector<unsigned> Sample, long double DefaultExpectedValue, double Level) = 0;
+	virtual bool CriteriaExpectedRight(std::vector<unsigned> Sample, long double DefaultExpectedValue, double Level) = 0;
+	virtual bool CriteriaExpectedCenter(std::vector<unsigned> Sample, long double DefaultExpectedValue, double Level) = 0;
+	virtual bool CriteriaDeviationLeft(std::vector<unsigned> Sample, long double DefaultDeviation, double Level) = 0;
+	virtual bool CriteriaDeviationRight(std::vector<unsigned> Sample, long double DefaultDeviation, double Level) = 0;
+	virtual bool CriteriaDeviationCenter(std::vector<unsigned> Sample, long double DefaultDeviation, double Level) = 0;
 	
-	virtual bool CriteriaExpectedLeft(std::vector<unsigned long long>, long double DefaultExpectedValue) = 0;
-	virtual bool CriteriaExpectedRight(std::vector<unsigned long long>, long double DefaultExpectedValue) = 0;
-	virtual bool CriteriaExpectedCenter(std::vector<unsigned long long>, long double DefaultExpectedValue) = 0;
-	virtual bool CriteriaDeviationLeft(std::vector<unsigned long long>, long double DefaultDistorsion) = 0;
-	virtual bool CriteriaDeviationRight(std::vector<unsigned long long>, long double DefaultDistorsion) = 0;
-	virtual bool CriteriaDeviationCenter(std::vector<unsigned long long>, long double DefaultDistorsion) = 0;
+	virtual bool CriteriaExpectedLeft(std::vector<unsigned long long> Sample, long double DefaultExpectedValue, double Level) = 0;
+	virtual bool CriteriaExpectedRight(std::vector<unsigned long long> Sample, long double DefaultExpectedValue, double Level) = 0;
+	virtual bool CriteriaExpectedCenter(std::vector<unsigned long long> Sample, long double DefaultExpectedValue, double Level) = 0;
+	virtual bool CriteriaDeviationLeft(std::vector<unsigned long long> Sample, long double DefaultDeviation, double Level) = 0;
+	virtual bool CriteriaDeviationRight(std::vector<unsigned long long> Sample, long double DefaultDeviation, double Level) = 0;
+	virtual bool CriteriaDeviationCenter(std::vector<unsigned long long> Sample, long double DefaultDeviation, double Level) = 0;
 	
-	virtual bool CriteriaExpectedLeft(std::vector<double>) = 0;
-	virtual bool CriteriaExpectedRight(std::vector<double>) = 0;
-	virtual bool CriteriaExpectedCenter(std::vector<double>) = 0;
-	virtual bool CriteriaDeviationLeft(std::vector<double>) = 0;
-	virtual bool CriteriaDeviationRight(std::vector<double>) = 0;
-	virtual bool CriteriaDeviationCenter(std::vector<double>) = 0;
+	virtual bool CriteriaExpectedLeft(std::vector<double> Sample, double Level) = 0;
+	virtual bool CriteriaExpectedRight(std::vector<double> Sample, double Level) = 0;
+	virtual bool CriteriaExpectedCenter(std::vector<double> Sample, double Level) = 0;
+	virtual bool CriteriaDeviationLeft(std::vector<double> Sample, double Level) = 0;
+	virtual bool CriteriaDeviationRight(std::vector<double> Sample, double Level) = 0;
+	virtual bool CriteriaDeviationCenter(std::vector<double> Sample, double Level) = 0;
 	
-	virtual bool CriteriaExpectedLeft(std::vector<long double>) = 0;
-	virtual bool CriteriaExpectedRight(std::vector<long double>) = 0;
-	virtual bool CriteriaExpectedCenter(std::vector<long double>) = 0;
-	virtual bool CriteriaDeviationLeft(std::vector<long double>) = 0;
-	virtual bool CriteriaDeviationRight(std::vector<long double>) = 0;
-	virtual bool CriteriaDeviationCenter(std::vector<long double>) = 0;
+	virtual bool CriteriaExpectedLeft(std::vector<long double> Sample, double Level) = 0;
+	virtual bool CriteriaExpectedRight(std::vector<long double> Sample, double Level) = 0;
+	virtual bool CriteriaExpectedCenter(std::vector<long double> Sample, double Level) = 0;
+	virtual bool CriteriaDeviationLeft(std::vector<long double> Sample, double Level) = 0;
+	virtual bool CriteriaDeviationRight(std::vector<long double> Sample, double Level) = 0;
+	virtual bool CriteriaDeviationCenter(std::vector<long double> Sample, double Level) = 0;
 	
-	virtual bool CriteriaExpectedLeft(std::vector<unsigned>) = 0;
-	virtual bool CriteriaExpectedRight(std::vector<unsigned>) = 0;
-	virtual bool CriteriaExpectedCenter(std::vector<unsigned>) = 0;
-	virtual bool CriteriaDeviationLeft(std::vector<unsigned>) = 0;
-	virtual bool CriteriaDeviationRight(std::vector<unsigned>) = 0;
-	virtual bool CriteriaDeviationCenter(std::vector<unsigned>) = 0;
+	virtual bool CriteriaExpectedLeft(std::vector<unsigned> Sample, double Level) = 0;
+	virtual bool CriteriaExpectedRight(std::vector<unsigned> Sample, double Level) = 0;
+	virtual bool CriteriaExpectedCenter(std::vector<unsigned> Sample, double Level) = 0;
+	virtual bool CriteriaDeviationLeft(std::vector<unsigned> Sample, double Level) = 0;
+	virtual bool CriteriaDeviationRight(std::vector<unsigned> Sample, double Level) = 0;
+	virtual bool CriteriaDeviationCenter(std::vector<unsigned> Sample, double Level) = 0;
 	
-	virtual bool CriteriaExpectedLeft(std::vector<unsigned long long>) = 0;
-	virtual bool CriteriaExpectedRight(std::vector<unsigned long long>) = 0;
-	virtual bool CriteriaExpectedCenter(std::vector<unsigned long long>) = 0;
-	virtual bool CriteriaDeviationLeft(std::vector<unsigned long long>) = 0;
-	virtual bool CriteriaDeviationRight(std::vector<unsigned long long>) = 0;
-	virtual bool CriteriaDeviationCenter(std::vector<unsigned long long>) = 0;
+	virtual bool CriteriaExpectedLeft(std::vector<unsigned long long> Sample, double Level) = 0;
+	virtual bool CriteriaExpectedRight(std::vector<unsigned long long> Sample, double Level) = 0;
+	virtual bool CriteriaExpectedCenter(std::vector<unsigned long long> Sample, double Level) = 0;
+	virtual bool CriteriaDeviationLeft(std::vector<unsigned long long> Sample, double Level) = 0;
+	virtual bool CriteriaDeviationRight(std::vector<unsigned long long> Sample, double Level) = 0;
+	virtual bool CriteriaDeviationCenter(std::vector<unsigned long long> Sample, double Level) = 0;
 	
-	virtual void SetAppropriateParameters(std::vector<double>) = 0;
-	virtual void SetAppropriateParameters(std::vector<long double>) = 0;
-	virtual void SetAppropriateParameters(std::vector<unsigned>) = 0;
-	virtual void SetAppropriateParameters(std::vector<unsigned long long>) = 0;
+	virtual void SetAppropriateParameters(std::vector<double> Sample, double Level) = 0;
+	virtual void SetAppropriateParameters(std::vector<long double> Sample, double Level) = 0;
+	virtual void SetAppropriateParameters(std::vector<unsigned> Sample, double Level) = 0;
+	virtual void SetAppropriateParameters(std::vector<unsigned long long> Sample, double Level) = 0;
 	
 protected:
 	void SendContinuousProbabilityException()
@@ -105,5 +105,7 @@ protected:
 		throw TFloatArgumentException;
 	}
 };
+
+TMixedDistribution::~TMixedDistribution {}
 
 #endif

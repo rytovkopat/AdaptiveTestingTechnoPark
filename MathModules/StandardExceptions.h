@@ -4,7 +4,7 @@
 class TStandardException
 {
 public:
-	virtual ~TStandardException() = 0;
+	virtual ~TStandardException();
 	virtual const char* GetMessage() = 0;
 };
 

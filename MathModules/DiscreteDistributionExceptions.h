@@ -6,8 +6,8 @@
 class TFloatArgumentException : public TDiscreteDistributionException
 {
 public:
-	~TFloatArgumentException();
-	const char* GetMessage()
+	virtual ~TFloatArgumentException();
+	virtual const char* GetMessage()
 	{
 		return "Discrete distribution expects only unsigned integer arguments!";
 	}
@@ -16,8 +16,8 @@ public:
 class TDiscreteDensityException : public TDiscreteDistributionException
 {
 public:
-	~TDiscreteDensityException();
-	const char* GetMessage()
+	virtual ~TDiscreteDensityException();
+	virtual const char* GetMessage()
 	{
 		return "Discrete distribution does not have a density!";
 	}
