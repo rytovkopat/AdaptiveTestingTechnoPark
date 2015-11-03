@@ -114,7 +114,7 @@ protected:
 	// Defining parameters of distribution
 	long double _m;
 	long double _sigma;
-	long double _AreParamsValid();
+	bool _AreParamsValid();
 	
 	// This method block is for calling for calculation
 	long double _Density(long double _x);
