@@ -124,13 +124,13 @@ protected:
 	long double _Dispersion();
 	long double _StandardDeviation();
 	
-	bool _CriteriaExpectedLeft(std::vector<long double> _Sample, long double _expected_value, double _level);
-	bool _CriteriaExpectedRight(std::vector<long double> _Sample, long double _expected_value, double _level);
-	bool _CriteriaExpectedCenter(std::vector<long double> _Sample, long double _expected_value, double _level);
+	static bool _CriteriaExpectedLeft(std::vector<long double> _Sample, long double _expected_value, double _level);
+	static bool _CriteriaExpectedRight(std::vector<long double> _Sample, long double _expected_value, double _level);
+	static bool _CriteriaExpectedCenter(std::vector<long double> _Sample, long double _expected_value, double _level);
 	
-	bool _CriteriaDeviationLeft(std::vector<long double> _Sample, long double _deviation, double _level);
-	bool _CriteriaDeviationRight(std::vector<long double> _Sample, long double _deviation, double _level);
-	bool _CriteriaDeviationCenter(std::vector<long double> _Sample, long double _deviation, double _level);
+	static bool _CriteriaDeviationLeft(std::vector<long double> _Sample, long double _deviation, double _level);
+	static bool _CriteriaDeviationRight(std::vector<long double> _Sample, long double _deviation, double _level);
+	static bool _CriteriaDeviationCenter(std::vector<long double> _Sample, long double _deviation, double _level);
 	
 	void _SetParameters(std::vector<long double> _Sample);
 };
