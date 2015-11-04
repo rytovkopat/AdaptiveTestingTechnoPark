@@ -12,6 +12,11 @@ public:
 	TOneDimensionNormalDistribution(long double m, long double sigma);
 	TOneDimensionNormalDistribution(unsigned m, unsigned sigma);
 	TOneDimensionNormalDistribution(unsigned long long m, unsigned long long sigma);
+	TOneDimensionNormalDistribution(const TCommonSample<long double> &Sample);
+	TOneDimensionNormalDistribution(const TCommonSample<unsigned long long> &Sample);
+	
+	TOneDimensionNormalDistribution(const TOneDimensionNormalDistribution &Source);
+	TOneDimensionNormalDistribution& operator =(const TOneDimensionNormalDistribution &Source);
 
 	virtual ~TOneDimensionNormalDistribution() {}
 	
@@ -44,66 +49,41 @@ public:
 	virtual long double GetDispersion();
 	virtual long double GetStandardDevation();
 	
-	virtual bool CriteriaExpectedLeft(std::vector<double> Sample, long double DefaultExpectedValue, double Level);
-	virtual bool CriteriaExpectedRight(std::vector<double> Sample, long double DefaultExpectedValue, double Level);
-	virtual bool CriteriaExpectedCenter(std::vector<double> Sample, long double DefaultExpectedValue, double Level);
-	virtual bool CriteriaDeviationLeft(std::vector<double> Sample, long double DefaultDeviation, double Level);
-	virtual bool CriteriaDeviationRight(std::vector<double> Sample, long double DefaultDeviation, double Level);
-	virtual bool CriteriaDeviationCenter(std::vector<double> Sample, long double DefaultDeviation, double Level);
+	long double GetParameter_M();
+	long double GetParameter_Sigma();
+	TOneDimensionNormalDistribution& SetParameter_M(long double value_m);
+	TOneDimensionNormalDistribution& SetParameter_Sigma(long double value_sigma);
 	
-	virtual bool CriteriaExpectedLeft(std::vector<long double> Sample, long double DefaultExpectedValue, double Level);
-	virtual bool CriteriaExpectedRight(std::vector<long double> Sample, long double DefaultExpectedValue, double Level);
-	virtual bool CriteriaExpectedCenter(std::vector<long double> Sample, long double DefaultExpectedValue, double Level);
-	virtual bool CriteriaDeviationLeft(std::vector<long double> Sample, long double DefaultDeviation, double Level);
-	virtual bool CriteriaDeviationRight(std::vector<long double> Sample, long double DefaultDeviation, double Level);
-	virtual bool CriteriaDeviationCenter(std::vector<long double> Sample, long double DefaultDeviation, double Level);
+	virtual bool CriteriaExpectedLeft(const TCommonSample<long double> &Sample, long double DefaultExpectedValue, double Level);
+	virtual bool CriteriaExpectedRight(const TCommonSample<long double> &Sample, long double DefaultExpectedValue, double Level);
+	virtual bool CriteriaExpectedCenter(const TCommonSample<long double> &Sample, long double DefaultExpectedValue, double Level);
+	virtual bool CriteriaDeviationLeft(const TCommonSample<long double> &Sample, long double DefaultDeviation, double Level);
+	virtual bool CriteriaDeviationRight(const TCommonSample<long double> &Sample, long double DefaultDeviation, double Level);
+	virtual bool CriteriaDeviationCenter(const TCommonSample<long double> &Sample, long double DefaultDeviation, double Level);
 	
-	virtual bool CriteriaExpectedLeft(std::vector<unsigned> Sample, long double DefaultExpectedValue, double Level);
-	virtual bool CriteriaExpectedRight(std::vector<unsigned> Sample, long double DefaultExpectedValue, double Level);
-	virtual bool CriteriaExpectedCenter(std::vector<unsigned> Sample, long double DefaultExpectedValue, double Level);
-	virtual bool CriteriaDeviationLeft(std::vector<unsigned> Sample, long double DefaultDeviation, double Level);
-	virtual bool CriteriaDeviationRight(std::vector<unsigned> Sample, long double DefaultDeviation, double Level);
-	virtual bool CriteriaDeviationCenter(std::vector<unsigned> Sample, long double DefaultDeviation, double Level);
+	virtual bool CriteriaExpectedLeft(const TCommonSample<unsigned long long> &Sample, long double DefaultExpectedValue, double Level);
+	virtual bool CriteriaExpectedRight(const TCommonSample<unsigned long long> &Sample, long double DefaultExpectedValue, double Level);
+	virtual bool CriteriaExpectedCenter(const TCommonSample<unsigned long long> &Sample, long double DefaultExpectedValue, double Level);
+	virtual bool CriteriaDeviationLeft(const TCommonSample<unsigned long long> &Sample, long double DefaultDeviation, double Level);
+	virtual bool CriteriaDeviationRight(const TCommonSample<unsigned long long> &Sample, long double DefaultDeviation, double Level);
+	virtual bool CriteriaDeviationCenter(const TCommonSample<unsigned long long> &Sample, long double DefaultDeviation, double Level);
 	
-	virtual bool CriteriaExpectedLeft(std::vector<unsigned long long> Sample, long double DefaultExpectedValue, double Level);
-	virtual bool CriteriaExpectedRight(std::vector<unsigned long long> Sample, long double DefaultExpectedValue, double Level);
-	virtual bool CriteriaExpectedCenter(std::vector<unsigned long long> Sample, long double DefaultExpectedValue, double Level);
-	virtual bool CriteriaDeviationLeft(std::vector<unsigned long long> Sample, long double DefaultDeviation, double Level);
-	virtual bool CriteriaDeviationRight(std::vector<unsigned long long> Sample, long double DefaultDeviation, double Level);
-	virtual bool CriteriaDeviationCenter(std::vector<unsigned long long> Sample, long double DefaultDeviation, double Level);
+	virtual bool CriteriaExpectedLeft(const TCommonSample<long double> &Sample, double Level);
+	virtual bool CriteriaExpectedRight(const TCommonSample<long double> &Sample, double Level);
+	virtual bool CriteriaExpectedCenter(const TCommonSample<long double> &Sample, double Level);
+	virtual bool CriteriaDeviationLeft(const TCommonSample<long double> &Sample, double Level);
+	virtual bool CriteriaDeviationRight(const TCommonSample<long double> &Sample, double Level);
+	virtual bool CriteriaDeviationCenter(const TCommonSample<long double> &Sample, double Level);
 	
-	virtual bool CriteriaExpectedLeft(std::vector<double> Sample, double Level);
-	virtual bool CriteriaExpectedRight(std::vector<double> Sample, double Level);
-	virtual bool CriteriaExpectedCenter(std::vector<double> Sample, double Level);
-	virtual bool CriteriaDeviationLeft(std::vector<double> Sample, double Level);
-	virtual bool CriteriaDeviationRight(std::vector<double> Sample, double Level);
-	virtual bool CriteriaDeviationCenter(std::vector<double> Sample, double Level);
+	virtual bool CriteriaExpectedLeft(const TCommonSample<unsigned long long> &Sample, double Level);
+	virtual bool CriteriaExpectedRight(const TCommonSample<unsigned long long> &Sample, double Level);
+	virtual bool CriteriaExpectedCenter(const TCommonSample<unsigned long long> &Sample, double Level);
+	virtual bool CriteriaDeviationLeft(const TCommonSample<unsigned long long> &Sample, double Level);
+	virtual bool CriteriaDeviationRight(const TCommonSample<unsigned long long> &Sample, double Level);
+	virtual bool CriteriaDeviationCenter(const TCommonSample<unsigned long long> &Sample, double Level);
 	
-	virtual bool CriteriaExpectedLeft(std::vector<long double> Sample, double Level);
-	virtual bool CriteriaExpectedRight(std::vector<long double> Sample, double Level);
-	virtual bool CriteriaExpectedCenter(std::vector<long double> Sample, double Level);
-	virtual bool CriteriaDeviationLeft(std::vector<long double> Sample, double Level);
-	virtual bool CriteriaDeviationRight(std::vector<long double> Sample, double Level);
-	virtual bool CriteriaDeviationCenter(std::vector<long double> Sample, double Level);
-	
-	virtual bool CriteriaExpectedLeft(std::vector<unsigned> Sample, double Level);
-	virtual bool CriteriaExpectedRight(std::vector<unsigned> Sample, double Level);
-	virtual bool CriteriaExpectedCenter(std::vector<unsigned> Sample, double Level);
-	virtual bool CriteriaDeviationLeft(std::vector<unsigned> Sample, double Level);
-	virtual bool CriteriaDeviationRight(std::vector<unsigned> Sample, double Level);
-	virtual bool CriteriaDeviationCenter(std::vector<unsigned> Sample, double Level);
-	
-	virtual bool CriteriaExpectedLeft(std::vector<unsigned long long> Sample, double Level);
-	virtual bool CriteriaExpectedRight(std::vector<unsigned long long> Sample, double Level);
-	virtual bool CriteriaExpectedCenter(std::vector<unsigned long long> Sample, double Level);
-	virtual bool CriteriaDeviationLeft(std::vector<unsigned long long> Sample, double Level);
-	virtual bool CriteriaDeviationRight(std::vector<unsigned long long> Sample, double Level);
-	virtual bool CriteriaDeviationCenter(std::vector<unsigned long long> Sample, double Level);
-	
-	virtual void SetAppropriateParameters(std::vector<double> Sample);
-	virtual void SetAppropriateParameters(std::vector<long double> Sample);
-	virtual void SetAppropriateParameters(std::vector<unsigned> Sample);
-	virtual void SetAppropriateParameters(std::vector<unsigned long long> Sample);
+	virtual TOneDimensionNormalDistribution& SetAppropriateParameters(const TCommonSample<long double> &Sample);
+	virtual TOneDimensionNormalDistribution& SetAppropriateParameters(const TCommonSample<unsigned long long> &Sample);
 protected:
 	/* commented as defined backwards
 	void SendContinuousProbabilityException()
@@ -124,15 +104,16 @@ protected:
 	long double _Dispersion();
 	long double _StandardDeviation();
 	
-	static bool _CriteriaExpectedLeft(std::vector<long double> _Sample, long double _expected_value, double _level);
-	static bool _CriteriaExpectedRight(std::vector<long double> _Sample, long double _expected_value, double _level);
-	static bool _CriteriaExpectedCenter(std::vector<long double> _Sample, long double _expected_value, double _level);
+	static bool _CriteriaExpectedLeft(const TCommonSample<long double> &Sample, long double _expected_value, double _level);
+	static bool _CriteriaExpectedRight(const TCommonSample<long double> &Sample, long double _expected_value, double _level);
+	static bool _CriteriaExpectedCenter(const TCommonSample<long double> &Sample, long double _expected_value, double _level);
 	
-	static bool _CriteriaDeviationLeft(std::vector<long double> _Sample, long double _deviation, double _level);
-	static bool _CriteriaDeviationRight(std::vector<long double> _Sample, long double _deviation, double _level);
-	static bool _CriteriaDeviationCenter(std::vector<long double> _Sample, long double _deviation, double _level);
+	static bool _CriteriaDeviationLeft(const TCommonSample<unsigned long long> &Sample _Sample, long double _deviation, double _level);
+	static bool _CriteriaDeviationRight(const TCommonSample<unsigned long long> &Sample, long double _deviation, double _level);
+	static bool _CriteriaDeviationCenter(const TCommonSample<unsigned long long> &Sample, long double _deviation, double _level);
 	
-	void _SetParameters(std::vector<long double> _Sample);
+	bool _SetParameters(const TCommonSample<long double> &Sample);
+	bool _SetParameters(const TCommonSample<unsigned long long> &Sample);
 };
 
 #endif
