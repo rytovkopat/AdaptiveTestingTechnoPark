@@ -108,6 +108,14 @@ protected:
 	static bool _CriteriaExpectedRight(const TCommonSample<long double> &Sample, long double _expected_value, double _level);
 	static bool _CriteriaExpectedCenter(const TCommonSample<long double> &Sample, long double _expected_value, double _level);
 	
+	static bool _CriteriaExpectedLeft(const TCommonSample<unsigned long long> &Sample, long double _expected_value, double _level);
+	static bool _CriteriaExpectedRight(const TCommonSample<unsigned long long> &Sample, long double _expected_value, double _level);
+	static bool _CriteriaExpectedCenter(const TCommonSample<unsigned long long> &Sample, long double _expected_value, double _level);
+	
+	static bool _CriteriaDeviationLeft(const TCommonSample<long double> &Sample _Sample, long double _deviation, double _level);
+	static bool _CriteriaDeviationRight(const TCommonSample<long double> &Sample, long double _deviation, double _level);
+	static bool _CriteriaDeviationCenter(const TCommonSample<long double> &Sample, long double _deviation, double _level);
+	
 	static bool _CriteriaDeviationLeft(const TCommonSample<unsigned long long> &Sample _Sample, long double _deviation, double _level);
 	static bool _CriteriaDeviationRight(const TCommonSample<unsigned long long> &Sample, long double _deviation, double _level);
 	static bool _CriteriaDeviationCenter(const TCommonSample<unsigned long long> &Sample, long double _deviation, double _level);
