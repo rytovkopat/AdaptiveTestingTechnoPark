@@ -35,7 +35,7 @@ long double TOneDimensionNormalDistribution::GetParameter_Sigma() {
 }
 
 bool TOneDimensionNormalDistribution::_AreParamsValid() {
-        return _sigma>0.0 ?: true, false;
+        return _sigma>0.0 ? true : false;
 }
 
 TOneDimensionNormalDistribution& TOneDimensionNormalDistribution::SetParameter_M(long double value_m) {
