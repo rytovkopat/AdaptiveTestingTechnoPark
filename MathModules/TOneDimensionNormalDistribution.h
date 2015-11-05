@@ -116,4 +116,5 @@ protected:
 	bool _SetParameters(const TCommonSample<unsigned long long> &Sample);
 };
 
+
 #endif

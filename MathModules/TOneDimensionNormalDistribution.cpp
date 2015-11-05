@@ -1,5 +1,6 @@
 #include "TOneDimensionNormalDistribution.h"
 
+
 TOneDimensionNormalDistribution::TOneDimensionNormalDistribution()
 	: _m(-1.0), _sigma(-1.0)
 {
