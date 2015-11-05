@@ -1,4 +1,5 @@
 #include "TOneDimensionNormalDistribution.h"
+#include <cmath>
 
 TOneDimensionNormalDistribution::TOneDimensionNormalDistribution()
 	: _m(-1.0), _sigma(-1.0)
@@ -25,4 +26,44 @@ TOneDimensionNormalDistribution::TOneDimensionNormalDistribution(unsigned long l
 {
 }
 
+long double TOneDimensionNormalDistribution::GetParameter_M() {
+        return _m;
+}
 
+long double TOneDimensionNormalDistribution::GetParameter_Sigma() {
+        return _sigma;
+}
+
+bool TOneDimensionNormalDistribution::_AreParamsValid() {
+        return _sigma>0.0 ?: true, false;
+}
+
+TOneDimensionNormalDistribution& TOneDimensionNormalDistribution::SetParameter_M(long double value_m) {
+        _m=value_m;
+        return *this;
+}
+
+//add new Exception
+TOneDimensionNormalDistribution& TOneDimensionNormalDistribution::SetParameter_Sigma(long double value_sigma) {
+        if (this->_AreParamsValid()) {
+                _sigma = value_sigma;
+                return *this;
+        }
+        else
+                throw TOneDimensionNormalDistributionExceptionSetNegSigma;
+}
+
+long double TOneDimensionNormalDistribution::_Density(long double x) {
+        //return boost::math::pdf(x,_m,_sigma);
+        return 1/(_sigma * sqrt(2*M_PI)) * exp((-(x-_m)*(x-_m)) / (2 * _sigma * _sigma));
+}
+
+long double TOneDimensionNormalDistribution::_Function(long double _x) {
+        //return boost::math::cdf()
+        return (1+erfl((_x-_m)/sqrtl(2*_sigma*_sigma)))/2.0;
+}
+
+long double TOneDimensionNormalDistribution::_IntervalProbability(long double _left, long double _right) {
+        //boost::math::
+        return 0.0;
+}
