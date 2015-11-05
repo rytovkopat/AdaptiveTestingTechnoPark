@@ -1,28 +1,29 @@
 #include "TOneDimensionNormalDistribution.h"
 #include <cmath>
+#include <boost/math/distributions/normal.hpp>
 
 TOneDimensionNormalDistribution::TOneDimensionNormalDistribution()
-	: _m(-1.0), _sigma(-1.0)
+        : _m(-1.0), _sigma(-1.0)
 {
 }
 
 TOneDimensionNormalDistribution::TOneDimensionNormalDistribution(double m, double sigma)
-	: _m((long double)m), _sigma((long double)sigma)
+        : _m((long double)m), _sigma((long double)sigma)
 {
 }
 
 TOneDimensionNormalDistribution::TOneDimensionNormalDistribution(long double m, long double sigma)
-	: _m(m), _sigma(sigma)
+        : _m(m), _sigma(sigma)
 {
 }
 
 TOneDimensionNormalDistribution::TOneDimensionNormalDistribution(unsigned m, unsigned sigma)
-	: _m((long double)m), _sigma((long double)sigma)
+        : _m((long double)m), _sigma((long double)sigma)
 {
 }
 
 TOneDimensionNormalDistribution::TOneDimensionNormalDistribution(unsigned long long m, unsigned long long sigma)
-	: _m((long double)m), _sigma((long double)sigma)
+        : _m((long double)m), _sigma((long double)sigma)
 {
 }
 
@@ -35,7 +36,7 @@ long double TOneDimensionNormalDistribution::GetParameter_Sigma() {
 }
 
 bool TOneDimensionNormalDistribution::_AreParamsValid() {
-        return _sigma>0.0 ? true : false;
+        return _sigma>0.0 ?: true, false;
 }
 
 TOneDimensionNormalDistribution& TOneDimensionNormalDistribution::SetParameter_M(long double value_m) {
@@ -44,13 +45,12 @@ TOneDimensionNormalDistribution& TOneDimensionNormalDistribution::SetParameter_M
 }
 
 //add new Exception
-TOneDimensionNormalDistribution& TOneDimensionNormalDistribution::SetParameter_Sigma(long double value_sigma) {
-        if (this->_AreParamsValid()) {
-                _sigma = value_sigma;
-                return *this;
-        }
-        else
-                throw TOneDimensionNormalDistributionExceptionSetNegSigma;
+OneDimensionNormalDistribution& TOneDimensionNormalDistribution::SetParameter_Sigma(long double value_sigma) {
+	if (value_sigma <= 0.0)
+		throw TInvalidParametersException;
+
+	_sigma = value_sigma;
+	return *this;
 }
 
 long double TOneDimensionNormalDistribution::_Density(long double x) {
