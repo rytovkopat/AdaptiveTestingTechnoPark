@@ -25,24 +25,7 @@ TOneDimensionNormalDistribution::TOneDimensionNormalDistribution(unsigned long l
 {
 }
 
-private:	
-	//определение частоты  на заданном интервале
-	long double _GetFreqInInterval( const TCommonSample<long double> &Sample, long double _leftBound, long double _rightBound ); 
-	unsigned long long _GetFreqInInterval( const TCommonSample<unsigned long long> &Sample, unsigned long long _leftBound, unsigned long long _rightBound );
-	
-	//точечная оценка матожидания
-	long double _mPointEstimation( const TCommonSample<long double> &Sample );
-	unsigned long long _mPointEstimation( const TCommonSample<unsigned long long> &Sample );
-	
-	//точечная оценка средне-квадратического отклонения
-	long double _sigmaPointEstimation( const TCommonSample<long double> &Sample );
-	unsigned long long _sigmaPointEstimation( const TCommonSample<unsigned long long> &Sample );
-	
-	//определение теоретических частот
-	double _GetTheorFreq( const TCommonSample<long double> &Sample, long double _leftBound, long double _rightBound );
-	double _GetTheorFreq( const TCommonSample<unsigned long long> &Sample, unsigned long long _leftBound, unsigned long long _rightBound );
-	
-};
+
 
 //----------------------------------------------------------------------
 // IMPLEMENTATION OF TOneDimensionNormalDistribution.h by Temirlan
