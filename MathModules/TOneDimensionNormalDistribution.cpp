@@ -10,21 +10,29 @@ TOneDimensionNormalDistribution::TOneDimensionNormalDistribution()
 TOneDimensionNormalDistribution::TOneDimensionNormalDistribution(double m, double sigma)
         : _m((long double)m), _sigma((long double)sigma)
 {
+        if (_sigma <=0.0)
+                throw TInvalidParametersException;
 }
 
 TOneDimensionNormalDistribution::TOneDimensionNormalDistribution(long double m, long double sigma)
         : _m(m), _sigma(sigma)
 {
+        if (_sigma <=0.0)
+                throw TInvalidParametersException;
 }
 
 TOneDimensionNormalDistribution::TOneDimensionNormalDistribution(unsigned m, unsigned sigma)
         : _m((long double)m), _sigma((long double)sigma)
 {
+        if (_sigma <=0.0)
+                throw TInvalidParametersException;
 }
 
 TOneDimensionNormalDistribution::TOneDimensionNormalDistribution(unsigned long long m, unsigned long long sigma)
         : _m((long double)m), _sigma((long double)sigma)
 {
+        if (_sigma <=0.0)
+                throw TInvalidParametersException;
 }
 
 long double TOneDimensionNormalDistribution::GetParameter_M() {
@@ -54,12 +62,12 @@ TOneDimensionNormalDistribution& TOneDimensionNormalDistribution::SetParameter_S
 
 long double TOneDimensionNormalDistribution::_Density(long double x) {
         //return boost::math::pdf(x,_m,_sigma);
-        return 1/(sqrt(2*M_PI*_sigma)) * exp((-(x-_m)*(x-_m)) / (2 * _sigma));
+        return 1/(_sigma*sqrt(2*M_PI)) * exp((-(x-_m)*(x-_m)) / (2 * _sigma * _sigma));
 }
 
 long double TOneDimensionNormalDistribution::_Function(long double _x) {
         //return boost::math::cdf()
-        return (1+erfl((_x-_m)/sqrtl(2*_sigma)))/2.0;
+        return (1+erfl((_x-_m)/sqrtl(2*_sigma*_sigma)))/2.0;
 }
 
 long double TOneDimensionNormalDistribution::_IntervalProbability(long double _left, long double _right) {
@@ -71,11 +79,11 @@ long double TOneDimensionNormalDistribution::_ExpectedValue() {
 }
 
 long double TOneDimensionNormalDistribution::_Dispersion() {
-        return _sigma;
+        return _sigma*_sigma;
 }
 
 long double TOneDimensionNormalDistribution::_StandardDeviation() {
-        //???
+        return _sigma;
 }
 
 long double TOneDimensionNormalDistribution::GetDensity(double x) {
@@ -103,19 +111,19 @@ long double TOneDimensionNormalDistribution::GetFunctionValue(unsigned long long
 }
 
 long double TOneDimensionNormalDistribution::GetCumulativeFunctionValue(double x) {
-        //???
+        return _Function((long double)x);
 }
 
 long double TOneDimensionNormalDistribution::GetCumulativeFunctionValue(long double x) {
-        //???
+        return _Function(x);
 }
 
 long double TOneDimensionNormalDistribution::GetCumulativeFunctionValue(unsigned n) {
-        //???
+        return _Function((long double)n);
 }
 
 long double TOneDimensionNormalDistribution::GetCumulativeFunctionValue(unsigned long long n) {
-        //???
+        return _Function((long double)n);
 }
 
 long double TOneDimensionNormalDistribution::GetIntervalProbability(double LeftBound, double RightBound) {
