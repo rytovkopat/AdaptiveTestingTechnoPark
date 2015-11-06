@@ -29,6 +29,8 @@ public:
 	virtual long double GetCumulativeFunctionValue(unsigned n) = 0;
 	virtual long double GetCumulativeFunctionValue(unsigned long long n) = 0;
 	
+	virtual long double GetQuantile(double Level) = 0;
+	
 	virtual long double GetIntervalProbability(double LeftBound, double RightBound) = 0;
 	virtual long double GetIntervalProbability(long double LeftBound, long double RightBound) = 0;
 	
