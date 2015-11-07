@@ -104,15 +104,15 @@ unsigned long long TOneDimensionNormalDistribution::_sigmaPointEstimation( const
 //----------------------------------------------------------------------
 double TOneDimensionNormalDistribution::_GetTheorFreq( const TCommonSample<long double> &Sample, long double _leftBound, long double _rightBound ) {
 	Sample.GetSortedArray(true);
-	_m = _mPointEstimation( Sample );
-	_sigma = _sigmaPointEstimation( Sample );
+	_m = Sample.GetAverage();
+	_sigma = Sample.GetCorrectedSelectiveStandardDeviation();
 	return Sample.GetIntervalProbability( _leftBound, _rightBound) * Sample.GetSize();
 }
 
 double TOneDimensionNormalDistribution::_GetTheorFreq( const TCommonSample<unsigned long long> &Sample, unsigned long long _leftBound, unsigned long long _rightBound ) {
 	Sample.GetSortedArray(true);
-	_m = _mPointEstimation( Sample );
-	_sigma = _sigmaPointEstimation( Sample );
+	_m = Sample.GetAverage();
+	_sigma = Sample.GetCorrectedSelectiveStandardDeviation();
 	return Sample.GetIntervalProbability( _leftBound, _rightBound) * Sample.GetSize();
 }
 
@@ -137,7 +137,8 @@ bool TOneDimensionNormalDistribution::_SetParameters(const TCommonSample<long do
 		rightBound += intervalLength;
 	}
 	//???????????????? Поиск в boost ???????????????????????????????????
-	if( khiSquare < /*расчет квантили по заданному уровню значимости и степени свободы = (size - 2)*/  ) {
+	template typename<T>
+	if( khiSquare < quantile(chi_squared(Sample.GetrSize -2), 0.1)) ) {
 		return true;
 	} else {
 		return false;
@@ -164,7 +165,7 @@ bool TOneDimensionNormalDistribution::_SetParameters(const TCommonSample<unsigne
 		rightBound += intervalLength;
 	}
 	//???????????????? Поиск в boost ???????????????????????????????????
-	if( khiSquare < /*расчет квантили по заданному уровню значимости и степени свободы = (size - 2)*/  ) {
+	if( khiSquare < quantile(chi_squared(Sample.GetrSize -2), 0.1)) ) {
 		return true;
 	} else {
 		return false;
