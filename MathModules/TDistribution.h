@@ -31,6 +31,14 @@ public:
 	virtual long double GetDispersion() = 0;
 	virtual long double GetStandardDevation() = 0;
 	
+	virtual long double GetQuantile(double Level) = 0;
+	virtual long double GetQuantile(long double Level) = 0;
+	virtual unsigned long long GetIntegerQuantile(double Level) = 0;
+	virtual unsigned long long GetIntegerQuantile(long double Level) = 0;
+	virtual unsigned long long GetCumulativeIntegerQuantile(double Level) = 0;
+	virtual unsigned long long GetCumulativeIntegerQuantile(long double Level) = 0;
+	
+	
 	virtual bool CriteriaExpectedLeft(const TCommonSample<long double> &Sample, long double DefaultExpectedValue, double Level) = 0;
 	virtual bool CriteriaExpectedRight(const TCommonSample<long double> &Sample, long double DefaultExpectedValue, double Level) = 0;
 	virtual bool CriteriaExpectedCenter(const TCommonSample<long double> &Sample, long double DefaultExpectedValue, double Level) = 0;

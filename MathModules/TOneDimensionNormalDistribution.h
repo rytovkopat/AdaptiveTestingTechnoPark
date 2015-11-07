@@ -41,7 +41,8 @@ public:
 	virtual long double GetCumulativeFunctionValue(long double x);
 	virtual long double GetCumulativeFunctionValue(unsigned n);
 	virtual long double GetCumulativeFunctionValue(unsigned long long n);
-	virtual long double GetQuantile(double Level);
+
+	
 	
 	virtual long double GetIntervalProbability(double LeftBound, double RightBound);
 	virtual long double GetIntervalProbability(long double LeftBound, long double RightBound);
@@ -49,6 +50,13 @@ public:
 	virtual long double GetExpectedValue();
 	virtual long double GetDispersion();
 	virtual long double GetStandardDevation();
+	
+	virtual long double GetQuantile(double Level);
+	virtual long double GetQuantile(long double Level);
+	//virtual unsigned long long GetIntegerQuantile(double Level);
+	//virtual unsigned long long GetIntegerQuantile(long double Level);
+	//virtual unsigned long long GetCumulativeIntegerQuantile(double Level);
+	//virtual unsigned long long GetCumulativeIntegerQuantile(long double Level);
 	
 	long double GetParameter_M();
 	long double GetParameter_Sigma();

@@ -26,8 +26,7 @@ TOneDimensionNormalDistribution::TOneDimensionNormalDistribution(unsigned long l
 {
 }
 
-<<<<<<< HEAD
-=======
+
 long double TOneDimensionNormalDistribution::GetQuantile(double Level)
 {
 	if (Level < 0.0 || Level > 1.0)

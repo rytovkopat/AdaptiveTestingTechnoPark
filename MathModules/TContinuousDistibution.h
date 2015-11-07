@@ -29,14 +29,31 @@ public:
 	virtual long double GetCumulativeFunctionValue(unsigned n) = 0;
 	virtual long double GetCumulativeFunctionValue(unsigned long long n) = 0;
 	
-	virtual long double GetQuantile(double Level) = 0;
-	
 	virtual long double GetIntervalProbability(double LeftBound, double RightBound) = 0;
 	virtual long double GetIntervalProbability(long double LeftBound, long double RightBound) = 0;
 	
 	virtual long double GetExpectedValue() = 0;
 	virtual long double GetDispersion() = 0;
 	virtual long double GetStandardDevation() = 0;
+	
+	virtual long double GetQuantile(double Level) = 0;
+	virtual long double GetQuantile(long double Level) = 0;
+	virtual unsigned long long GetIntegerQuantile(double Level)
+	{
+		throw "Cannot find accurate discrete quantiles!";
+	}
+	virtual unsigned long long GetIntegerQuantile(long double Level)
+	{
+		throw "Cannot find accurate discrete quantiles!";
+	}
+	virtual unsigned long long GetCumulativeIntegerQuantile(double Level)
+	{
+		throw "Cannot find accurate discrete quantiles!";
+	}
+	virtual unsigned long long GetCumulativeIntegerQuantile(long double Level)
+	{
+		throw "Cannot find accurate discrete quantiles!";
+	}
 	
 	virtual bool CriteriaExpectedLeft(const TCommonSample<long double> &Sample, long double DefaultExpectedValue, double Level) = 0;
 	virtual bool CriteriaExpectedRight(const TCommonSample<long double> &Sample, long double DefaultExpectedValue, double Level) = 0;
