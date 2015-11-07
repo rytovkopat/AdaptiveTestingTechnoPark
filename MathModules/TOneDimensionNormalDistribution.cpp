@@ -137,7 +137,6 @@ bool TOneDimensionNormalDistribution::_SetParameters(const TCommonSample<long do
 		rightBound += intervalLength;
 	}
 	//???????????????? Поиск в boost ???????????????????????????????????
-	template typename<T>
 	if( khiSquare < quantile(chi_squared(Sample.GetrSize -2), 0.1)) ) {
 		return true;
 	} else {
@@ -176,8 +175,8 @@ bool TOneDimensionNormalDistribution::_SetParameters(const TCommonSample<unsigne
 
 TOneDimensionNormalDistribution&  TOneDimensionNormalDistribution::SetAppropriateParameters(const TCommonSample<long double> &Sample) {
 	if( _SetParameters( Sample ) == true ) {
-		_m = _mPointEstimation( Sample );
-		_sigma = _sigmaPointEstimation( Sample );
+		_m = Sample.GetAverage();
+		_sigma = Sample.GetCorrectedSelectiveStandardDeviation();
 		return *this;
 	} else {
 		_sigma = -1;
@@ -187,9 +186,9 @@ TOneDimensionNormalDistribution&  TOneDimensionNormalDistribution::SetAppropriat
 }
 
 TOneDimensionNormalDistribution&  TOneDimensionNormalDistribution::SetAppropriateParameters(const TCommonSample<unsigned long long> &Sample) {
-	if( _SetParameters( Sample ) == true ) {
-		_m = _mPointEstimation( Sample );
-		_sigma = _sigmaPointEstimation( Sample );
+if( _SetParameters( Sample ) == true ) {
+		_m = Sample.GetAverage();
+		_sigma = Sample.GetCorrectedSelectiveStandardDeviation();
 		return *this;
 	} else {
 		_sigma = -1;
