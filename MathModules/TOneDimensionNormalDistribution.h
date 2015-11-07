@@ -112,7 +112,7 @@ protected:
 	static bool _CriteriaDeviationRight(const TCommonSample<unsigned long long> &Sample, long double _deviation, double _level);
 	static bool _CriteriaDeviationCenter(const TCommonSample<unsigned long long> &Sample, long double _deviation, double _level);
 	
-	//рачет хи квадрат для данной выборки и сравнение с табличной, здесь я затупил, признаю)
+	//рачет хи квадрат для данной выборки и сравнение с табличной
 	bool _SetParameters(const TCommonSample<long double> &Sample);
 	bool _SetParameters(const TCommonSample<unsigned long long> &Sample);
 	
@@ -130,13 +130,7 @@ private:
 	double _GetTheorFreq( const TCommonSample<long double> &Sample, long double _leftBound, long double _rightBound );
 	double _GetTheorFreq( const TCommonSample<unsigned long long> &Sample, unsigned long long _leftBound, unsigned long long _rightBound );
 };
-/*
-				Так ли мы используем готовые методы из Sample?
-long double TCommonSample<T>::GetAverage();
-unsigned long long TCommonSample<T>::GetAverage();
 
-long double TCommonSample<T>:: GetCorrectedSelectiveStandardDeviation();
-unsigned long long TCommonSample<T>:: GetCorrectedSelectiveStandardDeviation();*/
 
 long double GetFreqInInterval( const TCommonSample<long double> &Sample, long double leftBound, long double rightBound ); 
 unsigned long long GetFreqInInterval( const TCommonSample<unsigned long long> &Sample, unsigned long long leftBound, unsigned long long rightBound );
