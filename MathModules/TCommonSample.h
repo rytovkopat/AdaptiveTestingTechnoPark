@@ -82,5 +82,40 @@ long double TCommonSample<T>::GetSelectiveDispersion()
 	
 }
 
+template <typename T>
+long double TCommonSample<T>::GetAverage() {
+	Sample.GetSortedArray(true);
+	int size = Sample.GetSize();
+	int intervalsCount = ceil(log2(size)); // число интервалов
+	long double intervalLength = (Sample[size - 1] - Sample[0]) / intervalsCount; //длина одного интервала
+	
+	long double leftBound = Sample[0];
+	long double rightBound = Sample[0] + intervalLength;
+	long double mPointEstimation = 0;
+	for( int i = 0; i < intervalsCount; i++ ) {
+		mPointEstimation += (rightBound + leftBound) * GetFreqInInterval( Sample, leftBound, rightBound )  / 2;  
+	}
+	return mPointEstimation;
+}
+
+template <typename T>
+long double TCommonSample<T>::GetCorrectedSelectiveStandardDeviation() {
+	Sample.GetSortedArray(true);
+	int size = Sample.GetSize();
+	int intervalsCount = ceil(log2(size)); // число интервалов
+	long double intervalLength = (Sample[size - 1] - Sample[0]) / intervalsCount; // длина одного интервала
+	
+	long double leftBound = Sample[0];
+	long double rightBound = Sample[0] + intervalLength;
+	long double sigmaPointEstimation = 0;
+	long double mPointEstimation = _mPointEstimation( Sample ); // оценка матожидания
+	long double temp = 0;
+	for( int i = 0; i < intervalsCount; i++ ) {
+		temp = (rightBound + leftBound) / 2 - mPointEstimation;
+		sigmaPointEstimation += pow( temp, 2 ) * GetFreqInInterval( Sample, leftBound, rightBound );  
+	}
+	return sqrt( sigmaPointEstimation * size / (size - 1) );
+}
+
 
 #endif
