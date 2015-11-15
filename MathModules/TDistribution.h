@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "DistributionExceptions.h"
+#incldue "AllocationExceptions.h"
 #include "TCommonSample.h"
 
 class TDistribution
