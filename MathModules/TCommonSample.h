@@ -47,6 +47,7 @@ public:
 	long double GetCorrectedSelectiveDispersion();
 	long double GetCorrectedSelectiveStandardDeviation();
 	long double GetSelectiveDistributionFunctionValue(const T& x);
+	long double GetSelectiveDistributionCumulativeFunctionValue(const T& x);
 	unsigned GetSize();
 	
 	std::vector<T> GetArrayAsIs();
@@ -94,17 +95,21 @@ private:
 // ----- Constructor & Destructor block ------
 template <typename T>
 TCommonSample<T>::TCommonSample()
-	: _base(0), _size(0), _capacity(0), _sortStand(NOT_CONTROLLED), _isContainerModified(LARGE_MODIFY)
+	: _base(0), _size(0), _capacity(0), _sortStand(NOT_CONTROLLED),
+		_isContainerModified(SMALL_MODIFY)
 {
 }
 
 template <typename T, typename SourceT>
 TCommonSample<T>::TCommonSample(const std::vector<SourceT> &SourceVector)
-try : _capacity(0), _size(0), _base(0), _sortStand(NOT_CONTROLLED), _isContainerModified(LARGE_MODIFY)
+try : _capacity(0), _size(0), _base(0), _sortStand(NOT_CONTROLLED),
+		_isContainerModified(LARGE_MODIFY)
 {
 	_EnlargeCapacity(SourceVector.size());
 	
 	_InitFromVector(SourceVector);
+	if (_size <= 1)
+		_isContainerModified = SMALL_MODIFY;
 }
 catch (TSampleInvalidAllocationException& ex)
 {
@@ -113,8 +118,10 @@ catch (TSampleInvalidAllocationException& ex)
 }
 
 template <typename T>
-TCommonSample<T>::TCommonSample(const TCommonSample &SourceSample), _isContainerModified(LARGE_MODIFY)
-try : _capacity(0), _size(0), _base(0), _sortStand(SourceSample.GetSortStand())
+TCommonSample<T>::TCommonSample(const TCommonSample &SourceSample)
+try : _capacity(0), _size(0), _base(0),
+		_sortStand(SourceSample.GetSortStand()),
+		_isContainerModified(LARGE_MODIFY)
 {
 	_EnlargeCapacity(SourceSample.GetSize());
 	
@@ -122,6 +129,8 @@ try : _capacity(0), _size(0), _base(0), _sortStand(SourceSample.GetSortStand())
 	_size = SourceVector_TCopy.size();
 	
 	_InitFromVector(SourceVector_TCopy);
+	if (_size <= 1)
+		_isContainerModified = SMALL_MODIFY;
 }
 catch (TSampleInvalidAllocationException& ex)
 {
@@ -242,7 +251,7 @@ void TCommonSample<T>::_RecountMaxMinValues()
 		case HEAP_MAX:
 			_max_value = _base[0];
 			_min_value = _base[_size>>1];
-			for (unsigned index = (_size>>1) + 1; index < size; index++)
+			for (unsigned index = (_size>>1) + 1; index < _size; index++)
 			{
 				if (_base[index] < _min_value)
 					_min_value = _base[index];
@@ -251,7 +260,7 @@ void TCommonSample<T>::_RecountMaxMinValues()
 		case HEAP_MIN:
 			_min_value = _base[0];
 			_max_value = _base[_size>>1];
-			for (unsigned index = (_size>>1) + 1; index < size; index++)
+			for (unsigned index = (_size>>1) + 1; index < _size; index++)
 			{
 				if (_base[index] > _max_value)
 					_max_value = _base[index];
@@ -282,7 +291,9 @@ template <typename T>
 long double TCommonSample<T>::GetSelectiveDispersion()
 try
 {
-	if (_isContainerModified)
+	if (_size < 2)
+		throw TIllicitSampleException();
+	if (_isContainerModified != NOT_MODIFIED)
 		_RecountMainValues();	
 	return _dispersion;
 }
@@ -295,7 +306,9 @@ template <typename T>
 long double TCommonSample<T>::GetCorrectedSelectiveDispersion()
 try
 {
-	if (_isContainerModified)
+	if (_size < 2)
+		throw TIllicitSampleException();
+	if (_isContainerModified != NOT_MODIFIED)
 		_RecountMainValues();	
 	return _correctedDispersion;
 }
@@ -308,7 +321,9 @@ template <typename T>
 long double TCommonSample<T>::GetSelectiveStandardDeviation()
 try
 {
-	if (_isContainerModified)
+	if (_size < 2)
+		throw TIllicitSampleException();
+	if (_isContainerModified != NOT_MODIFIED)
 		_RecountMainValues();
 	return _standardDeviation;
 }
@@ -321,7 +336,9 @@ template <typename T>
 long double TCommonSample<T>::GetCorrectedSelectiveStandardDeviation()
 try
 {
-	if (_isContainerModified)
+	if (_size < 2)
+		throw TIllicitSampleException();
+	if (_isContainerModified != NOT_MODIFIED)
 		_RecountMainValues();
 	return _correctedStandardDeviation;
 }
@@ -334,9 +351,41 @@ template <typename T>
 long double TCommonSample<T>::GetAverage()
 try
 {
-	if (_isContainerModified)
+	if (_size <= 0)
+		throw TEmptySampleException();
+	if (_isContainerModified == LARGE_MODIFY)
 		_RecountMainValues();
 	return _average_value;
+}
+catch(TIllicitSampleException &ex)
+{
+	throw;
+}
+
+template <typename T>
+T& TCommonSample<T>::GetMin()
+try
+{
+	if (_size <= 0)
+		throw TEmptySampleException();
+	if (_isContainerModified == LARGE_MODIFY)
+		_RecountMainValues();
+	return _min_value;
+}
+catch(TIllicitSampleException &ex)
+{
+	throw;
+}
+
+template <typename T>
+T& TCommonSample<T>::GetMax()
+try
+{
+	if (_size <= 0)
+		throw TEmptySampleException();
+	if (_isContainerModified == LARGE_MODIFY)
+		_RecountMainValues();
+	return _max_value;
 }
 catch(TIllicitSampleException &ex)
 {
@@ -353,7 +402,11 @@ try
 	
 	_base[_size++] = NewValue;
 	if (size == 1)
-		_isContainerModified = LARGE_MODIFY;
+	{
+		_min_value = _max_value = _base[0];
+		_average_value = (long double)_base[0];
+		_isContainerModified = SMALL_MODIFY;
+	}
 	else if (size == 2)
 	{
 		_average_value = (_base[0] + _base[1]) / 2;
@@ -541,22 +594,68 @@ catch (TSampleInvalidAllocationException& ex)
 	// may be permission for logging this fault;
 	throw;
 }
-catch (bad_alloc)
+catch (std::bad_alloc)
 {
 	// may be permission for logging std::vector creator fault;
 	throw;
 }
 
 template <typename T>
-void TCommonSample<T>::BuildHeap()
+void TCommonSample<T>::_BuildHeapMax()
 {
-	
+	// builds heap in the max case
+	_sortStand = HEAP_MAX;
+}
+
+template <typename T>
+void TCommonSample<T>::_BuildHeapMin()
+{
+	// builds heap in the min case
+	_sortStand = HEAP_MIN;
+}
+
+template <typename T>
+void TCommonSample<T>::_SortASC()
+{
+	// Here might be an optimization for another sorts before-made
+	std::sort(_base, _base + _size);
+	_sortStand = SORT_ASC;
+}
+
+template <typename T>
+void TCommonSample<T>::_SortDeSC()
+{
+	// Here might be an optimization for another sorts before-made
+	std::sort(_base, _base + _size, std::greater);
+	_sortStand = SORT_DESC;
 }
 
 template <typename T>
 long double TCommonSample<T>::GetSelectiveDistributionFunctionValue(const T& x)
 {
-	
+	// Here might be an optimization for another sorts before-made
+	_SortASC();
+	if (x <= _min_value)
+		return 0.0;
+	if (x > _max_value)
+		return 1.0;
+	// binary search for first not_less than x
+	unsigned pos_x = binary_search_greater_or_equal(x);
+	return (long double)pos_x / _size;
+}
+
+template <typename T>
+long double TCommonSample<T>::GetSelectiveDistributionCumulativeFunctionValue(const T& x)
+{
+	// Here might be an optimization for another sorts before-made
+	_SortASC();
+	if (x < _min_value)
+		return 0.0;
+	if (x >= _max_value)
+		return 1.0;
+	// binary search for first greater than x
+	unsigned pos_x = binary_search_greater(x);
+	return (long double)pos_x / _size;
 }
 
 #endif
