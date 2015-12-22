@@ -34,10 +34,6 @@ public:
 	
 	bool IncludeElement(const T& NewValue);
 	bool AppendVector(const std::vector<T> &AdditionalVector);
-	bool MergeWith(TCommonSample<T>& OtherSample);
-	T ReplaceLastElement(const T& NewValue);
-	T ExcludeLastElement();
-	bool EliminateDownto(const unsigned NewSize);
 	
 	T& GetMin();
 	T& GetMax();
@@ -496,43 +492,6 @@ catch (TSampleInvalidAllocationException& ex)
 }
 
 template <typename T>
-bool TCommonSample<T>::EliminateDownto(const unsigned NewSize)
-{
-	if (_size <= 1)
-		throw TIllicitSampleException();
-	
-	if (NewSize >= _size)
-		throw TImpossibleSampleEliminationException();
-		
-	// Insert here algorithm of "clever" sample's elimination!!!
-	
-	return true;
-}
-
-template <typename T>
-T TCommonSample<T>::ReplaceLastElement(const T& NewValue)
-{
-	if (_size <= 0)
-		throw TEmptySampleException();
-	
-	T Result = _base[_size - 1];
-	_base[_size - 1] = NewValue;
-	_isContainerModified = true;
-	_sortStand = NOT_CONTROLLED;
-	return Result;
-}
-
-template <typename T>
-T TCommonSample<T>::ExcludeLastElement()
-{
-	if (_size <= 0)
-		throw TEmptySampleException();
-		
-	_isContainerModified = true;
-	return _base[--_size];
-}
-
-template <typename T>
 unsigned TCommonSample<T>::GetSize()
 {
 	return _size;
@@ -542,62 +501,6 @@ template <typename T>
 SortFormate TCommonSample<T>::GetSortStand()
 {
 	return _sortStand;
-}
-
-template <typename T>
-bool TCommonSample<T>::MergeWith(TCommonSample<T> &OtherSample)
-try
-{
-	if (_capacity < _size + OtherSample.GetSize())
-		_EnlargeCapacity(_size + OtherSample.GetSize());
-	unsigned home_size = _size;
-	_size += OtherSample.GetSize();
-		
-	std::vector<T> AddVector;
-	switch(_sortStand)
-	{
-		case NOT_CONTROLLED:
-			AddVector = OtherSample.GetArrayAsIs();
-			_InitFromVector(AddVector, home_size);
-			break;
-		case SORT_ASC: 
-			AddVector = OtherSample.GetSortedArray(true);
-			_Merge_SortedASC(AddVector);
-			
-			std::vector<T> merge_base(_size);
-			std::merge(_base, _base + home_size,
-						AddVector.begin(), AddVector.end(),
-						merge_base.begin(), std::less);
-			_InitFromVector(merge_base);
-			break;
-		case SORT_DESC: 
-			AddVector = OtherSample.GetSortedArray(false);
-			_Merge_SortedDeSC(AddVector);
-			
-			std::vector<T> merge_base(_size);
-			std::merge(_base, _base + home_size,
-						AddVector.begin(), AddVector.end(),
-						merge_base.begin(), std::greater);
-			_InitFromVector(merge_base);
-			break;
-		case HEAP_MIN:
-			AddVector = OtherSample.GetArrayAsIs();
-			
-			break;
-		case HEAP_MAX:
-		
-			break;
-	}
-}
-catch (TSampleInvalidAllocationException& ex)
-{
-	// may be permission for logging this fault;
-	throw;
-}
-catch (std::bad_alloc)
-{
-	// may be permission for logging std::vector creator fault;
-	throw;
 }
 
 template <typename T>
